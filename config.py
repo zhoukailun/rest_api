@@ -9,5 +9,3 @@ class Config:
     UVICORN_WORKERS = int(os.environ.get("UVICORN_WORKERS", 1)),
     UVICORN_RELOAD = bool(os.environ.get("UVICORN_RELOAD", True)),
     UVICORN_LOG_LEVEL = os.environ.get("UVICORN_LOG_LEVEL", "info")
-
-print(int(None))
