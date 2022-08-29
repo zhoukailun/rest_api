@@ -40,7 +40,7 @@ VirtualEnv files was included in the package
 $ cd ./rest_api
 
 # activate virtualenv
-$ source source venv/bin/activate
+$ source venv/bin/activate
 
 # run service
 $ uvicorn app.main:app --reload
