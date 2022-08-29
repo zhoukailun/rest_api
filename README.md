@@ -43,7 +43,7 @@ $ cd ./rest_api
 $ source venv/bin/activate
 
 # run service
-$ uvicorn app.main:app --reload
+$ venv/bin/uvicorn app.main:app --reload
 
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 INFO:     Started reloader process [28720]
