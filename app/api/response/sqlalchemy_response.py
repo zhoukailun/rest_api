@@ -37,13 +37,6 @@ def response_update_error(count, reason):
     )
 
 
-def response_search_error(reason):
-    return JSONResponse(
-        content={"result": False, "messages": "Search data failed. Reason: " + reason},
-        status_code=status.HTTP_400_BAD_REQUEST,
-    )
-
-
 def response_error(errors):
     return JSONResponse(
         content={"result": False, "messages": str(errors)},
@@ -68,5 +61,19 @@ def response_error_attribute():
 def response_empty_data():
     return JSONResponse(
         content={"result": False, "messages": "Empty data provided."},
+        status_code=status.HTTP_400_BAD_REQUEST,
+    )
+
+
+def response_test(start, end):
+    return JSONResponse(
+        content={"result": True, "count_succ": int(end) - int(start), "messages": "Mock data {}-{} imported.".format(str(start), str(end))},
+        status_code=status.HTTP_201_CREATED,
+    )
+
+
+def response_test_error(start):
+    return JSONResponse(
+        content={"result": False, "messages": "Mock data '{}' was already imported".format(str(start))},
         status_code=status.HTTP_400_BAD_REQUEST,
     )

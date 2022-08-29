@@ -18,6 +18,7 @@ A REST API project based on fastapi
   - [Search by id](#Search-by-id)
   - [Search by query](#Search-by-query)
   - [Update](#Update)
+  - [Tests](#Tests)
   - [Interactive API docs](#Interactive-API-docs)
   - [Alternative API docs](#Alternative-API-docs)
 - [Project Structure](#Project-Structure)
@@ -77,6 +78,13 @@ $ docker restart rest_api_service
 # check logs within 100 lines
 $ docker logs --tail=100  rest_api_service
 ```
+
+Test service
+```sh
+# import 100 mock objects for testing
+$ curl -X 'POST' 'http://127.0.0.1:8000/api/v1/tests/import?start=1&end=100'
+```
+
 
 # API Docs
 
@@ -273,6 +281,32 @@ Input body parameters are the same as [Create](#Create)
 }
 ```
 
+## Tests
+
+- **API**: /api/v1/tests/import
+- **Method**: POST
+- **Description**: Import mock objects data for testing
+- **Input Parameters Example**:
+```sh
+$ curl -X 'POST' 'http://127.0.0.1:8000/api/v1/tests/import?start=1&end=100'
+```
+
+| name  | type | required | default value | description |
+| ----- | ---- | -------- | ------------- | ----------- |
+| start  | **Int** |no|1|test data start number|
+| end  | **Int**  |no|100|test data end number |
+
+- **Response Type**: JSON
+- **Successful Status Code**: 201
+- **Response Example**:
+```json
+{
+  "result": true,
+  "count_succ": 99,
+  "messages": "Mock data 1-100 imported."
+}
+```
+
 ## Interactive API docs
 After service is running, go to http://127.0.0.1:8000/docs
 You will see the automatic interactive API documentation (provided by [Swagger](https://github.com/swagger-api/swagger-ui) UI):
@@ -299,7 +333,6 @@ You will see the alternative automatic documentation (provided by [ReDoc](https:
 │   │       └── default.py
 │   ├── db
 │   │   ├── database.py
-│   │   ├── dc_assets.db
 │   │   ├── operators.py
 │   │   └── tables.py
 │   ├── main.py
@@ -312,7 +345,7 @@ You will see the alternative automatic documentation (provided by [ReDoc](https:
 ├── config.py
 ├── requirements.txt
 ├── tests
-│   └── __init__.py
+│   └── import_test_data.py
 └── venv
 ```
 
