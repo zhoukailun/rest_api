@@ -39,11 +39,20 @@ VirtualEnv files was included in the package
 # go to the project directory
 $ cd ./rest_api
 
+# install virtualenv
+$ pip3 install virtualenv
+
+# create virtual env
+$ python3 -m virtualenv venv
+
 # activate virtualenv
 $ source venv/bin/activate
 
+# install dependencies
+$ venv/bin/pip3 install -r requirements.txt
+
 # run service
-$ venv/bin/uvicorn app.main:app --reload
+$ venv/bin/uvicorn app.main:app --reload --host=0.0.0.0 --port=8000
 
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 INFO:     Started reloader process [28720]
