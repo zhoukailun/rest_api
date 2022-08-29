@@ -15,6 +15,9 @@ class DBOperator:
         :param objects_li: list of objects to add
         :return: JSONResponse
         """
+        if not objects_li:
+            return sqlalchemy_response.response_empty_data()
+
         # generate object adding list
         obj_operation_li = []
         for obj in objects_li:
@@ -93,6 +96,9 @@ class DBOperator:
             result_query = sql_query_obj.all()
         except SQLAlchemyError as e:
             return sqlalchemy_response.response_search_error(e)
+        except AttributeError:
+            return sqlalchemy_response.response_error_attribute()
+
 
         # append all fields if 'fields_selected' was empty, otherwise append selected fields
         response_data = []
@@ -101,9 +107,10 @@ class DBOperator:
                 response_data.append(obj.to_json())
         else:
             for obj in result_query:
+                obj_json = obj.to_json()
                 obj_data = {}
                 for field in condition_dict.fields_selected:
-                    obj_data[field] = getattr(obj, field)
+                    obj_data[field] = obj_json.get(field)
                 response_data.append(obj_data)
         return sqlalchemy_response.response_search(len(response_data), response_data)
 

@@ -4,14 +4,14 @@ from fastapi import status
 
 def response_create(count):
     return JSONResponse(
-        content={"result": True, "count_succ": count, "messages": "Create Data Successfully."},
+        content={"result": True, "count_succ": count, "messages": "Create data successfully."},
         status_code=status.HTTP_201_CREATED,
     )
 
 
 def response_search(count, data):
     return JSONResponse(
-        content={"result": True, "count_succ": count, "messages": "", "data": data},
+        content={"result": True, "count_succ": count, "messages": "Search data successfully.", "data": data},
         status_code=status.HTTP_200_OK,
     )
 
@@ -54,5 +54,19 @@ def response_error(errors):
 def response_error_asset_type():
     return JSONResponse(
         content={"result": False, "messages": "Unknown asset type."},
+        status_code=status.HTTP_400_BAD_REQUEST,
+    )
+
+
+def response_error_attribute():
+    return JSONResponse(
+        content={"result": False, "messages": "Asset type and fields provided not matching."},
+        status_code=status.HTTP_400_BAD_REQUEST,
+    )
+
+
+def response_empty_data():
+    return JSONResponse(
+        content={"result": False, "messages": "Empty data provided."},
         status_code=status.HTTP_400_BAD_REQUEST,
     )

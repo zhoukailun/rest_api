@@ -6,4 +6,4 @@ router = APIRouter()
 
 
 router.include_router(default.router, tags=["Default"])
-router.include_router(assets.router,  prefix="/aoi/v1/assets", tags=["Data Center Assets API"])
+router.include_router(assets.router,  prefix="/api/v1/assets", tags=["Data Center Assets API"])

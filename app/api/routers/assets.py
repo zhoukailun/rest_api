@@ -6,7 +6,7 @@ from app.db.operators import DBOperator
 router = APIRouter()
 
 
-@router.get("/{asset_type}}/search", name="Search Objects by ID")
+@router.get("/{asset_type}/search", name="Search Objects by ID")
 async def search_asset_object_by_id(asset_type: AssetPath, asset_id: str = None):
     db_operator = DBOperator()
     return db_operator.search_by_id(asset_type, asset_id)
